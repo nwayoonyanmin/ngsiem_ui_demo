@@ -1,1 +1,12 @@
 docker run --rm -v "%cd%":/app -w /app php:8.2-cli php composer.phar require aws/aws-sdk-php
+
+docker run --rm -v "%cd%":/app -w /app composer:2 composer install
+
+docker run -d -p 8000:8000 -v "%cd%":/var/www/html php:8.2-cli php -S 0.0.0.0:8000 -t /var/www/htm
+
+docker run -d -p 8000:8000 ^
+  -v "%cd%":/var/www/html ^
+  -v "%USERPROFILE%\.aws":/root/.aws ^
+  -e AWS_PROFILE=default ^
+  --name php-aws-server php:8.2-cli ^
+  php -S 0.0.0.0:8000 -t /var/www/html
