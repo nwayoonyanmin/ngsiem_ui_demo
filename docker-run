@@ -10,3 +10,5 @@ docker run -d -p 8000:8000 ^
   -e AWS_PROFILE=default ^
   --name php-aws-server php:8.2-cli ^
   php -S 0.0.0.0:8000 -t /var/www/html
+
+  docker run -d -p 8000:8000 -v "%cd%":/var/www/html -v "%USERPROFILE%\.aws":/root/.aws -e AWS_PROFILE=default --name php-aws-server php:8.2-cli php -S 0.0.0.0:8000 -t /var/www/html
